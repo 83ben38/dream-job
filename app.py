@@ -29,7 +29,7 @@ def register_pages():
 def register_aptitude_test():
     history = [{
         "role":"system",
-        "content":"Create statements for an aptitude test which a user will rate from 1 to 7, 1 being strongly disagree, 4 being neutral, and 7 being strongly agree. Create one statement at a time starting with something like 'I like' or 'I am good at' or 'I prefer'. Make sure to cover multiple skill dimensions (hard skills, soft skills, and technical skills) After 15 statements, you may say only 'done' if you think you have a job to assign to them. You must say 'done' before 30 statements. Create the first statement."
+        "content":"Create statements for an aptitude test which a user will rate from 1 to 7, 1 being strongly disagree, 4 being neutral, and 7 being strongly agree. Create one statement at a time starting with something like 'I like' or 'I am good at' or 'I prefer'. Make sure to cover multiple skill dimensions (hard skills and soft skills) over a variety of jobs. After 15 statements, you may say only 'done' if you think you have a job to assign to them. You must say 'done' before 30 statements. Create the first statement."
     }]
     @app.route('/get_question',methods=['POST'])
     #Generates the next question for the aptitude test
@@ -59,7 +59,7 @@ def register_aptitude_test():
         if (len(question)<6):
             #Add prompt
             history.append({"role":"system",
-                            "content":"Respond with only the job you assign to the user."})
+                            "content":"Respond with only the job you assign to the user. Be extremely specific on what job they are assigned."})
             #Generate job choice
             job=client.chat.completions.create(
                 model="gpt-4o-mini",
