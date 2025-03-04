@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dream Jobs - Aptitude Test</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</head>
+<body>
+    <header>
+        <a href="./">aptitude test</a>
+        <a href="./search">search</a>
+        <a href="./jobs">popular jobs</a>
+    </header>
+    <main>
+        <div class="aptitude-test">
+            <p id="statement" class="statement">
+              
+            </p>
+            <div class="rating-container">
+              <div class="circle-container">
+                <button class="circle circle-green circle-xl" type="button" onclick="response(7)"></button>
+                <button class="circle circle-green circle-lg" type="button" onclick="response(6)"></button>
+                <button class="circle circle-green circle-md" type="button" onclick="response(5)"></button>
+                <button class="circle  circle-sm" type="button" onclick="response(4)"></button>
+                <button class="circle circle-red circle-md" type="button" onclick="response(3)"></button>
+                <button class="circle circle-red circle-lg" type="button" onclick="response(2)"></button>
+                <button class="circle circle-red circle-xl" type="button" onclick="response(1)"></button>
+              </div>
+              <div class="label-container">
+                <span class="label-left">Strongly Agree</span>
+                <span class="label-right">Strongly Disagree</span>
+              </div>
+            </div>
+          </div>
+          
+    </main>
+</body>
+</html>
