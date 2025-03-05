@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded',function(){
             const skill_requirements = document.getElementById('skill-requirements');
             for (item in data.skill_requirements){
                 const li = document.createElement('li');
-                li.textContent = item;
+                li.textContent = data.skill_requirements[item];
                 skill_requirements.appendChild(li);
             }
             const school_required = document.getElementById('school-required');
@@ -45,13 +45,13 @@ document.addEventListener('DOMContentLoaded',function(){
             const salary = document.getElementById('salary');
             salary.textContent = data.salary;
             const job_image = document.getElementById('job-image');
-            job_image.src = data.job_image;
+            job_image.src = "static/images/"+data.job_image;
             const similar_jobs = document.getElementById('similar-jobs');
             for (item in data.similar_jobs){
                 const li = document.createElement('li')
                 const a = document.createElement('a');
-                a.textContent = item;
-                a.href = `job?job_name=${encodeURIComponent(data.job_name)}`;
+                a.textContent = data.similar_jobs[item];
+                a.href = `job?job_name=${encodeURIComponent(data.similar_jobs[item])}`;
                 li.appendChild(a);
                 similar_jobs.appendChild(li);
             }

@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request
 from openai import OpenAI
+import os
+from langchain_community.utilities import WikipediaAPIWrapper
 app = Flask(__name__)
 data = open("key.txt",'r').read()
 client = OpenAI(api_key=data)
@@ -24,15 +26,17 @@ def register_pages():
     #Page to search for any job
     def search():
         return render_template('search.html')
-
+    
 #All of the methods for aptitude test
 def register_aptitude_test():
     history = [{
-        "role":"system",
-        "content":"Create statements for an aptitude test finding a dream job in one of the following categories: Science, Technology & Engineering, Math, Business & Economics, Healthcare, Education, Politics & Law, Art, Agriculture, Manufacturing & Construction, Entertainment, and Law Enforcement. A user will rate statements from 1 to 7, 1 being strongly disagree, 4 being neutral, and 7 being strongly agree. Create one statement at a time starting with something like 'I like' or 'I am good at' or 'I prefer' or 'I can'. Make sure to cover every job field with one statement. Make sure every statement only has one thing to rate. Do not include anything except the statement."}]
+            "role":"system",
+            "content":"Create statements for an aptitude test finding a dream job in one of the following categories: Science, Technology & Engineering, Math, Business & Economics, Healthcare, Education, Politics & Law, Art, Agriculture, Manufacturing & Construction, Entertainment, and Law Enforcement. A user will rate statements from 1 to 7, 1 being strongly disagree, 4 being neutral, and 7 being strongly agree. Create one statement at a time starting with something like 'I like' or 'I am good at' or 'I prefer' or 'I can'. Make sure to cover every job field with one statement. Make sure every statement only has one thing to rate. Do not include anything except the statement."}]
+
     @app.route('/get_question',methods=['POST'])
     #Generates the next question for the aptitude test
     def get_question():
+        nonlocal history
         if not 'rating' in request.json:
             history = [{
             "role":"system",
@@ -81,12 +85,34 @@ def register_aptitude_test():
 
 #All of the methods for job page
 def register_job():
-
+    wi : WikipediaAPIWrapper
     @app.route('/generate_job_info', methods=['POST'])
     #Generates all of the info for a job page
-    def generate_job_info():
-        return {"error":"not implemented"}
+    def generate_job_info(): 
+        nonlocal wi
+        wi = WikipediaAPIWrapper(top_k_results=1)
+        job_name = request.json['job_name']
+        data = wi.load(job_name)
+        dict = {}
+        dict["job_description"] = get_response("Generate a 3 paragraph description on what this job does: " +  job_name + " Wikipedia info related to the job: " + data[0].metadata['summary'])
+        dict["skill_requirements"] = get_response("List 3 skill requirements for the following job, each on their own line: " + job_name + " Do not give anything except the requirements.").split("\n")
+        dict["school_required"] = get_response("How much school is required for this job: " + job_name + "? Say only school requirements without explanations.")
+        dict["salary"] = get_response("What is the range from 1st to 3rd quartile of pay on this job: " + job_name + "? Say only the money amounts with a dash between them.")
+        image_options = [f for f in os.listdir("static/images")]
+        dict["job_image"] = get_response("Pick an image that best represents the following job: " + job_name + ". Reply with only the image name and nothing else. Images:" +str(image_options))
+        dict["similar_jobs"] = get_response("List 3 jobs similar to the following job, each on their own line: " + job_name + " Do not give anything except the jobs.").split("\n")
+        dict["wiki_link"] = data[0].metadata['source']
+        return dict
     
+
+    #Returns an AI response
+    def get_response(prompt):
+        return client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages= [{"role":"system","content":prompt}]
+        ).choices[0].message.content.strip()
+    
+
     @app.route('/get_q_a',methods=['POST'])
     #responds to a q&a request
     def get_q_a():
