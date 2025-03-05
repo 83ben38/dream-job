@@ -33,12 +33,12 @@ def register_aptitude_test():
     @app.route('/get_question',methods=['POST'])
     #Generates the next question for the aptitude test
     def get_question():
-        if (len(history)==1):
+        if not 'rating' in request.json:
+            history = [{
+            "role":"system",
+            "content":"Create statements for an aptitude test finding a dream job in one of the following categories: Science, Technology & Engineering, Math, Business & Economics, Healthcare, Education, Politics & Law, Art, Agriculture, Manufacturing & Construction, Entertainment, and Law Enforcement. A user will rate statements from 1 to 7, 1 being strongly disagree, 4 being neutral, and 7 being strongly agree. Create one statement at a time starting with something like 'I like' or 'I am good at' or 'I prefer' or 'I can'. Make sure to cover every job field with one statement. Make sure every statement only has one thing to rate. Do not include anything except the statement."}]
             #Generate first question
-            question = client.chat.completions.create(
-                model="gpt-4o-mini",
-                messages=history,
-            ).choices[0].message.content.strip()
+            question = get_response()
             #Add to history
             history.append({"role":"assistant",
                            "content":question})
@@ -49,40 +49,35 @@ def register_aptitude_test():
         if (len(history)==25):
             history.append({"role":"system",
                             "content":"Identify 1 to 3 categories in which the user might be interested in working in."})
-            category = client.chat.completions.create(
-                model="gpt-4o-mini",
-                messages=history,
-            ).choices[0].message.content.strip()
+            category = get_response()
             history.append({"role":"assistant","content":category})
             history.append({"role":"system","content":"Continue creating statements that help classify specific dream jobs within those categories. When you have a dream job for them, after 5 to 15 more questions, reply with only 'done' and nothing else."})
         #Generate next question
-        question = client.chat.completions.create(
-                model="gpt-4o-mini",
-                messages=history,
-            ).choices[0].message.content.strip()
+        question = get_response()
         #Add to history
         history.append({"role":"assistant",
                            "content":question})
         #If the bot is done
         if (len(question)<6):
             history.append({"role":"system","content":"Identify the category which is most suited for the user based on their prefrences."})
-            category=client.chat.completions.create(
-                model="gpt-4o-mini",
-                messages=history,
-            ).choices[0].message.content.strip()
+            category=get_response()
             history.append({"role":"assistant","content":category})
             #Add prompt
             history.append({"role":"system",
-                            "content":"Respond with only the dream job you assign to the user in the identified field. Be extremely specific on what job they are assigned."})
+                            "content":"Respond with only the dream job you assign to the user in the identified field. Be extremely specific on what job they are assigned. Do not include any punctuation."})
             #Generate job choice
-            job=client.chat.completions.create(
-                model="gpt-4o-mini",
-                messages=history,
-            ).choices[0].message.content.strip()
+            job=get_response()
             #Return
             return {"done":True,"job_name":job}
         #Return
         return {"question":question,"done":False}
+
+    #Returns AI Response
+    def get_response():
+        return client.chat.completions.create(
+             model="gpt-4o-mini",
+            messages=history,
+        ).choices[0].message.content.strip()
 
 #All of the methods for job page
 def register_job():

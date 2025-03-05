@@ -8,6 +8,78 @@
     <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 </head>
 <body>
-    <header><a href="./">aptitude test</a><a href="./search">search</a><a href="./jobs">popular jobs</a></header>
+    <header>
+        <a href="./">aptitude test</a>
+        <a href="./search">search</a>
+        <a href="./jobs">popular jobs</a>
+    </header>
+    <main>
+        <!-- Job Title -->
+       <h1 id="job-title"></h1>
+        
+      
+        <!-- Job Description Section -->
+        <section>
+            <h2>Job Description</h2>
+            <p id="job-description">
+                      
+            </p>
+        </section>
+      
+        <!-- Skill Requirements Section -->
+        <section>
+          <h2>Skill Requirements</h2>
+          <ul id="skill-requirements">
+        
+          </ul>
+        </section>
+      
+        <!-- School Required Section -->
+        <section >
+          <h2>Education Requirements</h2>
+          <p id="school-required">
+
+          </p>
+        </section>
+      
+        <!-- Picture of a Person Working -->
+        <section>
+          <img id="job-image" />
+        </section>
+      
+        <!-- Salary Section -->
+        <section >
+          <h2>Salary</h2>
+          <p id="salary"></p>
+        </section>
+      
+        <!-- Similar Jobs Section -->
+        <section>
+          <h2>Similar Jobs</h2>
+          <ul id="similar-jobs">
+            
+          </ul>
+        </section>
+      
+        <!--Wikipedia Links Section-->
+        <section>
+            <a id="wikipedia-link">
+                Wiki Article
+            </a>
+        </section>
+        <!-- Q&A Section -->
+        <section id="q-and-a">
+          <h2>Q&A</h2>
+          <form id="qa-form">
+            <label for="question">Ask a question:</label>
+            <input type="text" id="question" name="question" placeholder="Enter your question here" required />
+            <button type="submit">Submit</button>
+          </form>
+          <div id="qa-answers">
+            
+          </div>
+        </section>
+    </main>
+      
 </body>
 </html>
