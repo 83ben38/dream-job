@@ -90,4 +90,36 @@ document.addEventListener('DOMContentLoaded',function(){
             });
         }
     }
+    document.getElementById("qa-form").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent the default form submission (page refresh)
+        window.submit();
+      });
+    window.submit = function(){
+        const params = new URLSearchParams(window.location.search);
+        const job_name = params.get('job_name');
+        const answerDiv = document.getElementById("qa-answers");
+        const newDiv = document.createElement("div");
+        const question = document.createElement("h3");
+        newDiv.appendChild(question);
+        answerDiv.appendChild(newDiv);
+        const textField = document.getElementById("question");
+        question.textContent = textField.value;
+        textField.value = "";
+        fetch('/get_q_a', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ question: question.textContent, job_name: job_name})
+        })
+        .then(response => response.json())
+        .then(data => {
+            const answer = document.createElement("p");
+            newDiv.appendChild(answer);
+            answer.textContent = data.answer;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
 })

@@ -116,7 +116,9 @@ def register_job():
     @app.route('/get_q_a',methods=['POST'])
     #responds to a q&a request
     def get_q_a():
-        return {"error":'not implemented'}
+        nonlocal wi
+        data = wi.load(request.json['job_name'])
+        return {"answer":get_response("Answer the following question: " + request.json['question'] + " using the following data: " + data[0].page_content + " If the data doesn't help answer the question, answer it to the best of your ability.")}
 
 if __name__ == '__main__':
     register_pages()
