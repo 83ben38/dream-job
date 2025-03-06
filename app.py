@@ -95,12 +95,12 @@ def register_job():
         data = wi.load(job_name)
         dict = {}
         dict["job_description"] = get_response("Generate a 3 paragraph description on what this job does: " +  job_name + " Wikipedia info related to the job: " + data[0].metadata['summary'])
-        dict["skill_requirements"] = get_response("List 3 skill requirements for the following job, each on their own line: " + job_name + " Do not give anything except the requirements.").split("\n")
+        dict["skill_requirements"] = get_response("List 3 skill requirements for the following job, each on their own line: " + job_name + " Do not give anything except the requirements. Do not put numbers or dashes at the beginning of lines.").split("\n")
         dict["school_required"] = get_response("How much school is required for this job: " + job_name + "? Say only school requirements without explanations.")
         dict["salary"] = get_response("What is the range from 1st to 3rd quartile of pay on this job: " + job_name + "? Say only the money amounts with a dash between them.")
         image_options = [f for f in os.listdir("static/images")]
-        dict["job_image"] = get_response("Pick an image that best represents the following job: " + job_name + ". Reply with only the image name and nothing else. Images:" +str(image_options))
-        dict["similar_jobs"] = get_response("List 3 jobs similar to the following job, each on their own line: " + job_name + " Do not give anything except the jobs.").split("\n")
+        dict["job_image"] = get_response("Pick an image that best represents the following job: " + job_name + ". You must pick an image, even if it is only loosely associated with the job. Images:" +str(image_options) + " Reply with only the image name and nothing else.")
+        dict["similar_jobs"] = get_response("List 3 jobs similar to the following job, each on their own line: " + job_name + " Do not give anything except the jobs. Do not put numbers or dashes at the beginning of lines.").split("\n")
         dict["wiki_link"] = data[0].metadata['source']
         return dict
     
