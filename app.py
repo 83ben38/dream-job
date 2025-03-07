@@ -102,6 +102,8 @@ def register_job():
         dict["job_image"] = get_response("Pick an image that best represents the following job: " + job_name + ". You must pick an image, even if it is only loosely associated with the job. Images:" +str(image_options) + " Reply with only the image name and nothing else.")
         dict["similar_jobs"] = get_response("List 3 jobs similar to the following job, each on their own line: " + job_name + " Do not give anything except the jobs. Do not put numbers or dashes at the beginning of lines.").split("\n")
         dict["wiki_link"] = data[0].metadata['source']
+        if dict["job_image"].startswith("."):
+            dict["job_image"] = dict["job_image"][1:]
         return dict
     
 
