@@ -57,6 +57,8 @@ document.addEventListener('DOMContentLoaded',function(){
             }
             const wiki_link = document.getElementById('wikipedia-link');
             wiki_link.href = data.wiki_link;
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('content').style.display = 'block';
         })
         .catch(error => {
             console.error('Error:', error);
@@ -116,7 +118,7 @@ document.addEventListener('DOMContentLoaded',function(){
         .then(data => {
             const answer = document.createElement("p");
             newDiv.appendChild(answer);
-            answer.textContent = data.answer;
+            answer.innerHTML = data.answer;
         })
         .catch(error => {
             console.error('Error:', error);

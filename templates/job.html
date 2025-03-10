@@ -4,16 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dream Jobs - Job</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+    <link rel="stylesheet" href="static/styles.css">
+    <script src="static/scripts.js"></script>
 </head>
 <body>
-    <header>
+  
+    <div class="headerBackgroundStyle">
+      <header>
+        <h1>Dream Jobs</h1>
+      </header>
+      <nav>
         <a href="./">aptitude test</a>
         <a href="./search">search</a>
         <a href="./jobs">popular jobs</a>
-    </header>
+        </nav>
+    </div>
     <main>
+      <div id="loading">
+        <h1>Loading...</h1>
+      </div>
+      <div id="content">
         <!-- Job Title -->
        <h1 id="job-title"></h1>
         
@@ -44,7 +54,7 @@
       
         <!-- Picture of a Person Working -->
         <section>
-          <img id="job-image"/>
+          <img id="job-image">
         </section>
       
         <!-- Salary Section -->
@@ -78,7 +88,11 @@
           <div id="qa-answers">
             
           </div>
+          <footer class="footerBackgroundStyle">
+            <p>Powered by two highschoolers and Visual Studio Code <br> &copy;2077 Optimous Prime</p>
+          </footer>
         </section>
+      </div>
     </main>
       
 </body>

@@ -120,7 +120,7 @@ def register_job():
     def get_q_a():
         nonlocal wi
         data = wi.load(request.json['job_name'])
-        return {"answer":get_response("Answer the following question: " + request.json['question'] + " using the following data: " + data[0].page_content + " If the data doesn't help answer the question, answer it to the best of your ability.")}
+        return {"answer":get_response("Answer the following question: " + request.json['question'] + " using the following data: " + data[0].page_content + " If the data doesn't help answer the question, answer it to the best of your ability. Use html to format your response. The entire response should be formatted in html.")[6:-3]}
 
 if __name__ == '__main__':
     register_pages()

@@ -1,10 +1,217 @@
+/* 
+    NOTE: Design for Mobile first you dunderhead
+*/
+@media only screen and (max-width: 600px) {
+  html {
+    background-color: lime;
+  }
+  body {
+    font-family: Verdana;
+    text-align: center;
+    margin: 0px;
+    background-color: white;
+    padding: 0px;
+    border: 0px;
+  }
+  
+  h1 {
+    color: darkgreen;
+  }
+  .headerBackgroundStyle {
+    background-image: linear-gradient(lime, white);
+  }
+  .mainBackgroundStyle{
+    background-color: white;
+  }
+  .footerBackgroundStyle {
+    background-image: linear-gradient(white, lime);
+    font-size: 12px;
+  }
+  .aptitude-test {
+    border-radius: 0px;
+    border-style: none;
+  }
+  img {
+    max-width: 250px;
+    max-height: 250px;
+    min-width: 250px;
+    min-height: 250px;
+    width: 250px;
+    height: 250px;
+    image-resolution: from-image 1dpi;
+
+    height: auto;
+    margin: auto;
+    
+    display: block;
+    width: 50%;
+  
+    border: 3px;
+    border-color: black;
+    border-style: solid;
+  }
+  .job-div {
+    margin: 20px;
+    
+    
+  }
+  .flexbox-rows {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+  }
+  .job-div > a {
+    text-wrap: nowrap;
+    justify-self: center;
+  }
+
+}
+@media only screen and (min-width: 600px) {
+  html {
+    /* Changes to html will cascade without media query*/
+    background-image: linear-gradient(to right, lime, white, lime);
+  }
+  .aptitude-test {
+    border: 2px black;
+    border-radius: 10px;
+    border-style: solid;
+  }
+  img {
+    max-width: 250px;
+    max-height: 250px;
+    min-width: 250px;
+    min-height: 250px;
+    width: 250px;
+    height: 250px;
+    image-resolution: from-image 1dpi;
+
+    height: auto;
+    display: block;
+    
+  
+    border: 3px;
+    border-color: black;
+    border-style: solid;
+  }
+  section > img {
+    max-width: 250px;
+    max-height: 250px;
+    min-width: 250px;
+    min-height: 250px;
+    width: 250px;
+    height: 250px;
+
+
+    margin: auto;
+    
+    display: block;
+    width: 50%;
+    
+  
+    border: 3px;
+    border-color: black;
+    border-style: solid;
+  }
+}
+
+body {
+  font-family: Verdana;
+  text-align: center;
+  margin: 0px;
+  
+  padding: 0px;
+  border: 0px;
+}
+a {
+  color: black;
+  text-decoration: none;
+  background-color: white;
+  border: 2px;
+  border-radius: 5px;
+  border-color: black;
+  border-style: solid;
+  padding: 5px;
+}
+h1 {
+  color: darkgreen;
+}
+.footerBackgroundStyle {
+  /*background-image: linear-gradient(white, lime);*/
+  font-size: 12px;
+}
+.job-div {
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+}
+#loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  background-image: linear-gradient(lime, white);
+}
+input[type="text"] {
+  border: 1px solid #ccc;
+  border-radius: 25px; 
+  padding: 8px 16px;
+}
+
+button[type="submit"] {
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  padding: 8px 16px;
+  background: #fff; 
+  cursor: pointer;
+}
+
+#content{
+  display: none;
+}
+.flexbox-rows {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 80px;
+
+  
+}
+.job-div > a {
+  text-wrap: nowrap;
+  justify-self: center;
+}
+
+ul > li {
+    list-style-type: none;
+    margin: 0 auto;
+}
+ul{
+  text-align: center;
+  justify-self: center;
+  padding-inline-start: 0;
+}
+ul#similar-jobs > li{
+    padding:20px;
+}
+/* The Nav breaks at a width of 308 pixels*/
+
+/* #region Ben spagetti */
 .aptitude-test {
     max-width: 400px;
+    min-width: 200px;
     margin: 0 auto;
     padding: 20px;
-    border: 2px solid black;
-    border-radius: 10px;
+    
+    
     text-align: center;
+    background-color: white;
   }
   .statement {
     margin-bottom: 20px;
@@ -24,23 +231,24 @@
     align-items: center;
     gap: 10px;
     margin-bottom: 10px;
+    
   }
-  
+  /* Basic circle */
   .circle {
-    --button-color: #333;
+    --button-color: darkgreen;
     border: solid;
     border-radius: 50%;
-    background-color: #ccc;
+    background-color: lightgray;
     border-color: var(--button-color); 
     cursor: pointer;
     transition: filter 0.2s, box-shadow 0.2s;
   }
   
-
+  /* Circles hover effect */
   .circle:hover {
     background-color: var(--button-color);
   }
-  
+  /* Circles */
   .circle-xl {
     width: 40px;
     height: 40px;
@@ -63,11 +271,11 @@
   
   /* Color modifications for the extremes */
   .circle-green {
-    --button-color: green;
+    --button-color: darkgreen;
   }
   
   .circle-red {
-    --button-color: red;
+    --button-color: gray;
   }
   
   .label-container {
@@ -82,3 +290,4 @@
     font-size: 14px;
   }
   
+  /* #endregion*/

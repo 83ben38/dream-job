@@ -5,17 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dream Jobs - Popular Jobs</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="static/styles.css">
+    <script src="static/scripts.js"></script>
     <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 </head>
 <body>
-    <header>
-        <a href="./">aptitude test</a>
-        <a href="./search">search</a>
-        <a href="./jobs">popular jobs</a>
-    </header>
+    <div class="headerBackgroundStyle">
+        <header>
+          <h1>Dream Jobs</h1>
+        </header>
+        <nav>
+          <a href="./">aptitude test</a>
+          <a href="./search">search</a>
+          <a href="./jobs">popular jobs</a>
+      </nav>
+      </div>
     <main>
-        <section>
-            <h1>Popular Jobs</h1>
+        <h1>Popular Jobs</h1>
+        <section class="flexbox-rows">
+            
             <div class="job-div">
                 <img src="/static/images/Analyst Worker.webp" alt="">
                 <a href="/job?job_name=Mathematician">Mathematician</a>
@@ -66,13 +74,16 @@
             </div>
             <div class="job-div">
                 <img src="/static/images/writer.jpeg" alt="">
-                <a href="/job?job_name=Book Writer">Book Writer</a>
+                <a href="/job?job_name=Writer">Writer</a>
             </div>
-            <div class="job-div"></div>
+            <div class="job-div">
                 <img src="/static/images/business executive.jpg" alt="">
-                <a href="/job?job_name=Corporate Overlord">Corporate Overlord</a>
+                <a href="/job?job_name=Corporate Villain">Corporate Villain</a>
             </div>
         </section>
+        <footer class="footerBackgroundStyle">
+            <p>Powered by two highschoolers and Visual Studio Code <br> &copy;2077 Optimous Prime</p>
+          </footer>
     </main>
 </body>
 </html>
